@@ -7,36 +7,25 @@ import userRoute from "./routes/userRoute.js";
 import cookieParser from 'cookie-parser';
 import connectToMongoDB from './db/connectToMongoDB.js';
 import helmet from 'helmet';
-import {app,server} from './socket/socket.js';
+import { app, server } from './socket/socket.js';
 
+// Load environment variables
+dotenv.config(); 
 
-dotenv.config();
 const PORT = process.env.PORT || 5000;
+const __dirname = path.resolve();
 
-const __dirname =path.resolve();
+// Debugging logs
+console.log('MONGO_DB_URI:', process.env.MONGO_DB_URI);
+console.log('PORT:', process.env.PORT);
+
 app.use(express.json());
 app.use(cookieParser());
 
-// Set Content Security Policy
-app.use(helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      fontSrc: ["'self'", "data:"],
-      imgSrc: ["'self'", "data:"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      connectSrc: ["'self'"],
-    }
-  }));
-  
+// Security settings
 
-// Additional security headers
-app.use(helmet.referrerPolicy({ policy: 'same-origin' }));
-app.use(helmet.hsts({ maxAge: 31536000, includeSubDomains: true, preload: true }));
 
-app.get('/', (req, res) => {
-  res.send("hello");
-});
+
 
 app.use("/api/auth", authRoute);
 app.use("/api/messages", messageRoute);
@@ -45,10 +34,10 @@ app.use("/api/users", userRoute);
 app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
 server.listen(PORT, () => {
   connectToMongoDB();
-  console.log("Server Started on port " + PORT);
+  console.log("Server started on port " + PORT);
 });
