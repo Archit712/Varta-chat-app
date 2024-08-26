@@ -44,7 +44,7 @@ const Signup = () => {
           />
         </div>
 
-          <div>
+<div>
   <label className='label p-2'>
     <span className='text-base label-text text-white font-bold'>Email</span>
   </label>
@@ -55,6 +55,7 @@ const Signup = () => {
     value={inputs.username}
     onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
     required
+    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
     onInvalid={(e) => e.target.setCustomValidity('Please enter a valid email address.')}
     onInput={(e) => e.target.setCustomValidity('')}
   />
