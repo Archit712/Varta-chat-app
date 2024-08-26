@@ -44,18 +44,21 @@ const Signup = () => {
           />
         </div>
 
-        <div>
-          <label className='label p-2 '>
-            <span className='text-base label-text text-white font-bold'>Username</span>
-          </label>
-          <input
-            type='email'
-            placeholder='Ente your username here...'
-            className='w-full input input-bordered h-10'
-             value={inputs.username}
-             onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
-          />
-        </div>
+          <div>
+  <label className='label p-2'>
+    <span className='text-base label-text text-white font-bold'>Email</span>
+  </label>
+  <input
+    type='email'
+    placeholder='Enter your email here...'
+    className='w-full input input-bordered h-10'
+    value={inputs.username}
+    onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
+    required
+    onInvalid={(e) => e.target.setCustomValidity('Please enter a valid email address.')}
+    onInput={(e) => e.target.setCustomValidity('')}
+  />
+</div>
 
         <div>
           <label className='label'>
