@@ -46,27 +46,21 @@ const Signup = () => {
 
 <div>
   <label className='label p-2'>
-    <span className='text-base label-text text-white font-bold'>Username</span>
+    <span className='text-base label-text text-white font-bold'>Email</span>
   </label>
   <input
     type='email'
     placeholder='Enter your email here...'
     className='w-full input input-bordered h-10'
     value={inputs.username}
-    onChange={(e) => {
-      const email = e.target.value;
-      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      if (emailPattern.test(email)) {
-        setInputs({ ...inputs, username: email });
-        e.target.setCustomValidity(''); // Clear any previous custom validation messages
-      } else {
-        e.target.setCustomValidity('Please enter a valid email address.');
-      }
-    }}
+    onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
     required
-    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+    onInvalid={(e) => e.target.setCustomValidity('Please enter a valid email address.')}
+    onInput={(e) => e.target.setCustomValidity('')}
   />
 </div>
+
 
 
         <div>
