@@ -53,13 +53,21 @@ const Signup = () => {
     placeholder='Enter your email here...'
     className='w-full input input-bordered h-10'
     value={inputs.username}
-    onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
+    onChange={(e) => {
+      const email = e.target.value;
+      const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (emailPattern.test(email)) {
+        setInputs({ ...inputs, username: email });
+        e.target.setCustomValidity(''); // Clear any previous custom validation messages
+      } else {
+        e.target.setCustomValidity('Please enter a valid email address.');
+      }
+    }}
     required
-    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-    onInvalid={(e) => e.target.setCustomValidity('Please enter a valid email address.')}
-    onInput={(e) => e.target.setCustomValidity('')}
+    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
   />
 </div>
+
 
         <div>
           <label className='label'>
