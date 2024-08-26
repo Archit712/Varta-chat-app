@@ -46,7 +46,7 @@ const Signup = () => {
 
 <div>
   <label className='label p-2'>
-    <span className='text-base label-text text-white font-bold'>Email</span>
+    <span className='text-base label-text text-white font-bold'>Username</span>
   </label>
   <input
     type='email'
