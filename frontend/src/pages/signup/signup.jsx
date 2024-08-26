@@ -49,7 +49,7 @@ const Signup = () => {
             <span className='text-base label-text text-white font-bold'>Username</span>
           </label>
           <input
-            type='text'
+            type='email'
             placeholder='Ente your username here...'
             className='w-full input input-bordered h-10'
              value={inputs.username}
